@@ -1,0 +1,84 @@
+<html>
+	<head>
+		<link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
+		<style>
+			body {
+				font-family: 'Quicksand', sans-serif;
+				text-align: center;
+			}
+
+			a {
+				color: #16a085;
+			}
+
+			a:visited {
+				color: #8e44ad;
+			}
+
+			ol{
+				list-style-type: none;
+				counter-reset: elementcounter;
+				padding-left: 0;
+				display: flex;
+				flex-direction: row;
+				flex-wrap: wrap;
+				justify-content: center;
+			}
+
+			li:before{
+				content: "Day " counter(elementcounter) ". ";
+				counter-increment:elementcounter;
+				vertical-align: top;
+				display: block;
+			}
+
+			li {
+				margin: .5em;
+			}
+
+			img {
+				max-width: 40vw;
+				border: solid #ccc 1px;
+				border-radius: 4px;
+
+			}
+
+		</style>
+	</head>
+	<body>
+		<h1>Daily UI Challenge</h1>
+		<h2>By <a href="http://github.com/mjkaufer">Matthew Kaufer</a></h2>
+		<ol id="images">
+		</ol>
+		<script>
+			function numberToFormattedNumberString(number) {
+				let numberString = number.toString();
+				while (numberString.length < 3)
+					numberString = '0' + numberString;
+
+				return numberString
+			}
+
+			function addImage(dayNumber) {
+				let imageSource = numberToFormattedNumberString(dayNumber) + '.png';
+				let imageElement = document.createElement('img');
+				imageElement.src = imageSource;
+
+				let linkElement = document.createElement('a');
+				linkElement.href = imageSource;
+				linkElement.appendChild(imageElement);
+
+				let listElement = document.createElement('li');
+				listElement.appendChild(linkElement);
+
+				document.getElementById('images').appendChild(listElement);
+			}
+
+			let currentDay = 5;
+
+			for (let day = 1; day <= currentDay; day++)
+				addImage(day);
+
+		</script>
+	</body>
+</html>
